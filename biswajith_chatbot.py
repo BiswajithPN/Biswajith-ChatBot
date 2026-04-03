@@ -476,9 +476,11 @@ TECHNICAL INTERESTS:
 PROJECTS:
 1. Life Tracker App - Futuristic mobile app for expense tracking, budget control, habit and productivity tracking
 2. PDF RAG Chatbot - AI chatbot using LangChain and Streamlit for answering from uploaded PDFs
-3. Resume and Internship Prep - Actively applying for software/IT internships
-4. Forex Basics PPT - Learning and presenting Forex trading basics
-5. MSEC E-SPORTS Poster - Designed a Free Fire esports poster
+3. Prabhu Swathi Wedding Website - A refined digital invitation website with a modern elegant design, cinematic visuals, smooth animations, minimal UI, and a clean structure for event schedules, venue information, and the couple's journey
+4. BISWAJITH CONNECT - A professional private messaging app with an invite-only friendship system, private chat access for accepted users, unique username locks, real-time Firestore sync, glassmorphism UI, multi-device support, and a strong privacy focus
+5. Resume and Internship Prep - Actively applying for software/IT internships
+6. Forex Basics PPT - Learning and presenting Forex trading basics
+7. MSEC E-SPORTS Poster - Designed a Free Fire esports poster
 
 SKILLS:
 - Video Editing, Chatbot building, App development, Content creation, Practical learning
