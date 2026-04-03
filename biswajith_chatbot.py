@@ -279,10 +279,24 @@ section.main,
 /* ── Chat input ── */
 [data-testid="stChatInputContainer"],
 [data-testid="stChatInput"] {
-    margin-top: 0.5rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 0.5rem;
+    margin-top: 0 !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     background: transparent !important;
+}
+
+[data-testid="stChatInputContainer"] > div,
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInputContainer"] form,
+[data-testid="stChatInput"] form {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stChatInputContainer"] p,
+[data-testid="stChatInput"] p {
+    margin: 0 !important;
 }
 
 /* Target every possible textarea wrapper Streamlit generates */
@@ -350,7 +364,7 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 /* ── Mobile tweaks ── */
 @media (max-width: 640px) {
     .block-container {
-        padding: 0.3rem 0.55rem 5rem !important;
+        padding: 0.3rem 0.55rem 0.75rem !important;
     }
     .header-bar { padding: 0.3rem 0 0.45rem; }
     [data-testid="stChatMessageContent"] {
@@ -360,6 +374,21 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
     .chips-row { gap: 0.28rem; }
     .chip { padding: 0.3rem 0.6rem; font-size: 0.68rem; }
     .online-badge { font-size: 0.68rem; padding: 0.28rem 0.55rem; }
+
+    [data-testid="stChatInputContainer"],
+    [data-testid="stChatInput"] {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: auto !important;
+    }
+
+    [data-testid="stChatInputContainer"] > div,
+    [data-testid="stChatInput"] > div,
+    [data-testid="stChatInputContainer"] form,
+    [data-testid="stChatInput"] form {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
     
     /* Prevent auto-zoom on iOS by strictly enforcing 16px font-size */
     /* and make typing area significantly bigger for mobile */
