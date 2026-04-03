@@ -470,7 +470,7 @@ EDUCATION:
 
 TECHNICAL INTERESTS:
 - Artificial Intelligence, Data Science, Software Development
-- Chatbot Development, RAG Systems, App Development
+- Chatbot Development, RAG Systems, App Development,Web Development
 - LangChain, Streamlit, PDF-based knowledge retrieval, Python
 
 PROJECTS:
@@ -484,16 +484,17 @@ PROJECTS:
 
 SKILLS:
 - Video Editing, Chatbot building, App development, Content creation, Practical learning
-- Python, LangChain, Streamlit, Flutter
+- Python, Java, Streamlit, Flutter
 
 CAREER GOALS:
 - Seeking software/IT internship
-- Career direction: AI, Data Science, Software Development
+- Career direction: AI, Data Science, Software Development,App development,Web development,Chatbot development
 
 PERSONALITY:
 - Prefers practical outputs over theory
 - Hands-on project-based learner
-- Curious about AI tools, tech, and gaming
+- Curious about AI tools, tech, and Trading
+- Enjoys creative work like video editing and design
 
 RULES:
 - First respond to the user's latest message directly. Do not ignore it.
