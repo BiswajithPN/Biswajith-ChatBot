@@ -350,7 +350,7 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 /* ── Mobile tweaks ── */
 @media (max-width: 640px) {
     .block-container {
-        padding: 0.3rem 0.55rem 0.3rem !important;
+        padding: 0.3rem 0.55rem 5rem !important;
     }
     .header-bar { padding: 0.3rem 0 0.45rem; }
     [data-testid="stChatMessageContent"] {
@@ -360,6 +360,28 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
     .chips-row { gap: 0.28rem; }
     .chip { padding: 0.3rem 0.6rem; font-size: 0.68rem; }
     .online-badge { font-size: 0.68rem; padding: 0.28rem 0.55rem; }
+    
+    /* Prevent auto-zoom on iOS by strictly enforcing 16px font-size */
+    /* and make typing area significantly bigger for mobile */
+    [data-testid="stChatInput"] textarea,
+    [data-testid="stChatInputContainer"] textarea,
+    div[data-testid="stChatInput"] > div > div > textarea,
+    div[data-testid="stChatInput"] div div textarea,
+    .stChatInput textarea,
+    textarea[aria-label],
+    textarea[placeholder="Ask about Biswajith..."] {
+        font-size: 16px !important; 
+        min-height: 60px !important;
+        padding: 1rem 1.1rem !important;
+        border-radius: 20px !important;
+    }
+    
+    /* Scale up the send button to match bigger textarea */
+    [data-testid="stChatInput"] button,
+    [data-testid="stChatInputContainer"] button {
+        width: 48px !important;
+        height: 48px !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
