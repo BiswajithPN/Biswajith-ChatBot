@@ -5,6 +5,7 @@ from groq import Groq
 
 load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+APP_VERSION = "ec3e528"
 
 st.set_page_config(
     page_title="Chat with Biswajith",
@@ -177,6 +178,18 @@ section.main,
     font-size: clamp(0.75rem, 2.2vw, 0.88rem);
     color: #7a8799 !important;
     margin-top: 0.25rem;
+}
+.version-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.45rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgba(191,148,79,0.18);
+    background: rgba(191,148,79,0.08);
+    color: #d8ba79 !important;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
 }
 .online-badge {
     display: inline-flex;
@@ -553,6 +566,7 @@ st.markdown("""
     <div class="header-left">
         <div class="header-title">Chat with Biswajith</div>
         <div class="header-sub">Ask about projects, skills, career goals, or creative work.</div>
+        <div class="version-badge">Live build: %s</div>
     </div>
     <div class="online-badge">
         <span class="online-dot"></span> Online
@@ -565,7 +579,7 @@ st.markdown("""
     <span class="chip">Creative Work</span>
     <span class="chip">Tech Stack</span>
 </div>
-""", unsafe_allow_html=True)
+""" % APP_VERSION, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="chat-meta">
