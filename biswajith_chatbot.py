@@ -294,6 +294,24 @@ section.main,
     padding: 0 !important;
 }
 
+[data-testid="stChatInputContainer"] form,
+[data-testid="stChatInput"] form,
+[data-testid="stChatInputContainer"] [data-testid="stChatInputForm"],
+[data-testid="stChatInput"] [data-testid="stChatInputForm"] {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
+}
+
+[data-testid="stChatInputContainer"] form > div:first-child,
+[data-testid="stChatInput"] form > div:first-child,
+[data-testid="stChatInputContainer"] [data-testid="stChatInputForm"] > div:first-child,
+[data-testid="stChatInput"] [data-testid="stChatInputForm"] > div:first-child {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
 [data-testid="stChatInputContainer"] p,
 [data-testid="stChatInput"] p {
     margin: 0 !important;
@@ -349,6 +367,10 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
     border: none !important;
     width: 44px !important;
     height: 44px !important;
+    min-width: 44px !important;
+    flex: 0 0 44px !important;
+    align-self: flex-end !important;
+    margin: 0 0 4px 0 !important;
     box-shadow: 0 4px 14px rgba(191,148,79,0.35) !important;
     transition: opacity 0.15s, transform 0.1s !important;
 }
@@ -389,6 +411,14 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
         margin: 0 !important;
         padding: 0 !important;
     }
+
+    [data-testid="stChatInputContainer"] form,
+    [data-testid="stChatInput"] form,
+    [data-testid="stChatInputContainer"] [data-testid="stChatInputForm"],
+    [data-testid="stChatInput"] [data-testid="stChatInputForm"] {
+        align-items: flex-end !important;
+        gap: 0.55rem !important;
+    }
     
     /* Prevent auto-zoom on iOS by strictly enforcing 16px font-size */
     /* and make typing area significantly bigger for mobile */
@@ -410,6 +440,9 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
     [data-testid="stChatInputContainer"] button {
         width: 48px !important;
         height: 48px !important;
+        min-width: 48px !important;
+        flex: 0 0 48px !important;
+        margin: 0 0 6px 0 !important;
     }
 }
 </style>
