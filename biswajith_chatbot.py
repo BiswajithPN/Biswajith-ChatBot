@@ -508,7 +508,6 @@ st.markdown("""
 st.markdown("""
 <div class="chat-meta">
     <span class="chat-meta-name">🤖 Biswajith AI</span>
-    <span class="chat-meta-hint">Concise questions = better answers</span>
 </div>
 """, unsafe_allow_html=True)
 
