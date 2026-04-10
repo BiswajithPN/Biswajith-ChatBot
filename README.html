@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bisbot - AI Powered Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #d3a44f;
+            --primary-dark: #8f6729;
+            --bg-dark: #090b11;
+            --bg-secondary: #121722;
+            --bg-tertiary: #171d2a;
+            --text-primary: #edf2f7;
+            --text-secondary: #8a97aa;
+            --accent-blue: #60a5fa;
+            --accent-green: #22c55e;
+            --accent-purple: #a78bfa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(18, 23, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(211, 164, 79, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            display: inline-block;
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(211, 164, 79, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 0.9rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--bg-dark);
+            box-shadow: 0 8px 24px rgba(211, 164, 79, 0.3);
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(211, 164, 79, 0.4);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(211, 164, 79, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid rgba(211, 164, 79, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(211, 164, 79, 0.3);
+            box-shadow: 0 16px 40px rgba(211, 164, 79, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-badge {
+            background: rgba(211, 164, 79, 0.08);
+            border: 1px solid rgba(211, 164, 79, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tech-badge:hover {
+            background: rgba(211, 164, 79, 0.15);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Installation Section */
+        .installation {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .code-block {
+            background: var(--bg-dark);
+            border: 1px solid rgba(211, 164, 79, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            line-height: 1.8;
+        }
+
+        .installation-step {
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .step-content {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Usage Section */
+        .usage {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .usage-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .usage-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(211, 164, 79, 0.1);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .usage-list li:before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(211, 164, 79, 0.1);
+            margin-top: 6rem;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+            margin: 2rem auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .headers-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero {
+                margin-top: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .feature-card {
+            animation: slideInUp 0.8s ease-out backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>Bisbot
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#tech">Tech Stack</a>
+                <a href="#installation">Installation</a>
+                <a href="#usage">Usage</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">🚀 AI-Powered Conversational Platform</div>
+        <h1>Meet Bisbot<br>Your Intelligent Assistant</h1>
+        <p class="hero-subtitle">
+            Experience cutting-edge AI conversations powered by Groq's lightning-fast infrastructure. 
+            Bisbot delivers real-time, intelligent responses with professional-grade performance.
+        </p>
+        <div class="cta-buttons">
+            <button class="cta-btn cta-btn-primary">Get Started</button>
+            <button class="cta-btn cta-btn-secondary">View Documentation</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Premium Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Lightning Fast</div>
+                <div class="feature-desc">
+                    Powered by Groq's advanced inference engine for sub-millisecond response times
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <div class="feature-title">Premium UI</div>
+                <div class="feature-desc">
+                    Beautiful, modern interface with dark theme optimized for professional use
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Secure & Private</div>
+                <div class="feature-desc">
+                    Enterprise-grade security with environment variable management
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Web-Based</div>
+                <div class="feature-desc">
+                    Built with Streamlit for seamless browser-based interaction
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">Advanced AI</div>
+                <div class="feature-desc">
+                    Leverages state-of-the-art language models for intelligent conversations
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-title">Easy Setup</div>
+                <div class="feature-desc">
+                    Simple installation and configuration with minimal dependencies
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack" id="tech">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-badge">Python 3.8+</div>
+            <div class="tech-badge">Streamlit</div>
+            <div class="tech-badge">Groq API</div>
+            <div class="tech-badge">python-dotenv</div>
+            <div class="tech-badge">Modern HTML5</div>
+            <div class="tech-badge">CSS3</div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation" id="installation">
+        <h2 class="section-title">Quick Setup</h2>
+        
+        <div class="installation-step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <div class="step-title">Clone or Download the Repository</div>
+                <div class="code-block">git clone &lt;repository-url&gt;</div>
+            </div>
+        </div>
+
+        <div class="installation-step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <div class="step-title">Install Required Dependencies</div>
+                <div class="code-block">pip install -r requirements.txt</div>
+            </div>
+        </div>
+
+        <div class="installation-step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <div class="step-title">Configure Environment Variables</div>
+                <div class="code-block">
+                    # Create a .env file in the project root<br>
+                    GROQ_API_KEY=your_groq_api_key_here
+                </div>
+            </div>
+        </div>
+
+        <div class="installation-step">
+            <span class="step-number">4</span>
+            <div class="step-content">
+                <div class="step-title">Run the Application</div>
+                <div class="code-block">streamlit run biswajith_chatbot.py</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section class="usage" id="usage">
+        <h2 class="section-title">How to Use</h2>
+        <ul class="usage-list">
+            <li>
+                <strong>Start Chatting:</strong> Simply open the application in your browser and begin typing your questions or prompts
+            </li>
+            <li>
+                <strong>API Key Setup:</strong> Ensure your Groq API key is properly configured in the .env file
+            </li>
+            <li>
+                <strong>Real-Time Responses:</strong> Receive instant, intelligent responses powered by advanced AI
+            </li>
+            <li>
+                <strong>Professional Interface:</strong> Enjoy a sleek, modern interface optimized for productivity
+            </li>
+            <li>
+                <strong>Customizable:</strong> Easily modify styling and configurations to match your preferences
+            </li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3 style="font-size: 1.5rem; margin: 2rem 0 1rem 0; color: var(--text-primary);">Environment Setup</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Make sure to set up your environment variables correctly. Create a .env file in your project root:
+        </p>
+        <div class="code-block">
+            GROQ_API_KEY=sk-gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                <strong>Bisbot</strong> - Powered by Groq AI & Streamlit
+            </div>
+            <div class="footer-links">
+                <a href="#">GitHub</a>
+                <a href="#">Documentation</a>
+                <a href="#">Support</a>
+                <a href="#">License</a>
+            </div>
+            <div class="divider" style="margin: 1.5rem auto;"></div>
+            <div class="footer-text">
+                © 2026 Biswajith. All rights reserved. | Built with ❤️ for developers
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
