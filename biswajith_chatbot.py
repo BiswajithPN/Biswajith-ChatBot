@@ -460,7 +460,35 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 .stSpinner > div { border-top-color: #d5af67 !important; }
 
 @media (max-width: 640px) {
-    .block-container { padding: 0.3rem 0.55rem 0.75rem !important; }
+    /* Mobile sidebar fixes */
+    [data-testid="stSidebar"] {
+        width: 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Mobile main content adjustments */
+    .main,
+    [data-testid="stMain"] {
+        margin-left: 280px !important;
+        width: calc(100% - 280px) !important;
+        padding: 0 !important;
+    }
+    
+    .block-container { 
+        padding: 0.3rem 0.55rem 0.75rem !important; 
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
     .header-bar { padding: 0.3rem 0 0.45rem; }
     [data-testid="stChatMessageContent"] { padding: 0.6rem 0.75rem !important; border-radius: 13px !important; }
     .chips-row { gap: 0.28rem; }
@@ -483,6 +511,36 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
         flex: 0 0 48px !important;
         margin: 0 0 6px 0 !important;
     }
+    
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+        [data-testid="stSidebar"] {
+            width: 250px !important;
+            min-width: 250px !important;
+            max-width: 250px !important;
+        }
+        
+        .main,
+        [data-testid="stMain"] {
+            margin-left: 250px !important;
+            width: calc(100% - 250px) !important;
+        }
+    }
+    
+    /* Ultra small mobile devices */
+    @media (max-width: 400px) {
+        [data-testid="stSidebar"] {
+            width: 240px !important;
+            min-width: 240px !important;
+            max-width: 240px !important;
+        }
+        
+        .main,
+        [data-testid="stMain"] {
+            margin-left: 240px !important;
+            width: calc(100% - 240px) !important;
+        }
+    }
 }
 </style>
 
@@ -496,11 +554,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Force sidebar with browser-specific fixes
         const sidebar = document.querySelector('[data-testid="stSidebar"]');
         if (sidebar) {
+            // Responsive sidebar width based on screen size
+            let sidebarWidth = '320px';
+            if (window.innerWidth <= 400) {
+                sidebarWidth = '240px';
+            } else if (window.innerWidth <= 480) {
+                sidebarWidth = '250px';
+            } else if (window.innerWidth <= 640) {
+                sidebarWidth = '280px';
+            }
+            
             // Base styles for all browsers
             sidebar.style.position = 'fixed !important';
             sidebar.style.left = '0 !important';
             sidebar.style.top = '0 !important';
-            sidebar.style.width = '320px !important';
+            sidebar.style.width = sidebarWidth + ' !important';
             sidebar.style.height = '100vh !important';
             sidebar.style.zIndex = '9999 !important';
             sidebar.style.display = 'block !important';
@@ -509,6 +577,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sidebar.style.borderRight = '1px solid rgba(255,255,255,0.07) !important';
             sidebar.style.transform = 'translateX(0) !important';
             sidebar.style.opacity = '1 !important';
+            sidebar.style.overflowY = 'auto !important';
+            sidebar.style.overflowX = 'hidden !important';
             
             // Chrome-specific fixes
             if (isChrome) {
@@ -517,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 sidebar.style.setProperty('position', 'fixed', 'important');
                 sidebar.style.setProperty('left', '0', 'important');
                 sidebar.style.setProperty('top', '0', 'important');
-                sidebar.style.setProperty('width', '320px', 'important');
+                sidebar.style.setProperty('width', sidebarWidth, 'important');
                 sidebar.style.setProperty('height', '100vh', 'important');
                 sidebar.style.setProperty('z-index', '9999', 'important');
                 sidebar.style.setProperty('background', '#0d0f14', 'important');
@@ -525,6 +595,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 sidebar.style.setProperty('opacity', '1', 'important');
                 sidebar.style.setProperty('-webkit-transform', 'translateX(0)', 'important');
                 sidebar.style.setProperty('-webkit-opacity', '1', 'important');
+                sidebar.style.setProperty('overflow-y', 'auto', 'important');
+                sidebar.style.setProperty('overflow-x', 'hidden', 'important');
             }
             
             // Firefox-specific fixes
@@ -538,12 +610,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Adjust main content for fixed sidebar
         const mainContent = document.querySelector('[data-testid="stMain"]');
         if (mainContent) {
-            mainContent.style.marginLeft = '320px !important';
-            mainContent.style.width = 'calc(100% - 320px) !important';
+            // Responsive margin based on sidebar width
+            const mainMargin = sidebarWidth;
+            const mainWidth = `calc(100% - ${sidebarWidth})`;
+            
+            mainContent.style.marginLeft = mainMargin + ' !important';
+            mainContent.style.width = mainWidth + ' !important';
             
             if (isChrome) {
-                mainContent.style.setProperty('margin-left', '320px', 'important');
-                mainContent.style.setProperty('width', 'calc(100% - 320px)', 'important');
+                mainContent.style.setProperty('margin-left', mainMargin, 'important');
+                mainContent.style.setProperty('width', mainWidth, 'important');
             }
         }
         
