@@ -89,10 +89,30 @@ div[data-testid="stSidebar"],
 }
 
 /* Force app layout to show sidebar */
+[data-testid="stAppViewContainer"],
 [data-testid="stAppViewContainer"] > div,
 [data-testid="element-container"] > div {
     display: flex !important;
     flex-direction: row !important;
+    width: 100% !important;
+}
+
+/* Make main content area fill remaining space */
+[data-testid="stMain"],
+.main,
+[data-testid="stMain"] > div,
+.main > div {
+    flex: 1 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+/* Ensure main content container fills space */
+.main .block-container {
+    width: 100% !important;
+    max-width: none !important;
+    flex: 1 !important;
 }
 
 /* Hide any collapse buttons */
@@ -427,10 +447,11 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 </style>
 
 <script>
-// Force sidebar to be visible on Render
+// Force sidebar and layout to be correct on Render
 document.addEventListener('DOMContentLoaded', function() {
-    // Multiple attempts to ensure sidebar is visible
-    const showSidebar = () => {
+    // Multiple attempts to ensure proper layout
+    const fixLayout = () => {
+        // Fix sidebar
         const sidebar = document.querySelector('[data-testid="stSidebar"]');
         if (sidebar) {
             sidebar.style.display = 'block !important';
@@ -440,9 +461,27 @@ document.addEventListener('DOMContentLoaded', function() {
             sidebar.style.maxWidth = '320px !important';
             sidebar.style.position = 'relative !important';
             sidebar.style.opacity = '1 !important';
+            sidebar.style.flex = '0 0 320px !important';
         }
         
-        // Try multiple class selectors
+        // Fix main content to fill remaining space
+        const mainContent = document.querySelector('[data-testid="stMain"]');
+        if (mainContent) {
+            mainContent.style.flex = '1 !important';
+            mainContent.style.minWidth = '0 !important';
+            mainContent.style.width = 'auto !important';
+            mainContent.style.maxWidth = 'none !important';
+        }
+        
+        // Fix app container
+        const appContainer = document.querySelector('[data-testid="stAppViewContainer"]');
+        if (appContainer) {
+            appContainer.style.display = 'flex !important';
+            appContainer.style.flexDirection = 'row !important';
+            appContainer.style.width = '100% !important';
+        }
+        
+        // Try multiple class selectors for sidebar
         const sidebarClasses = ['.css-1lcbmhc', '.css-1d391kg', '.css-17eqqhr'];
         sidebarClasses.forEach(cls => {
             const element = document.querySelector(cls);
@@ -451,13 +490,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.visibility = 'visible !important';
             }
         });
+        
+        // Fix block container
+        const blockContainers = document.querySelectorAll('.block-container');
+        blockContainers.forEach(container => {
+            container.style.width = '100% !important';
+            container.style.maxWidth = 'none !important';
+            container.style.flex = '1 !important';
+        });
     };
     
     // Run immediately and multiple times
-    showSidebar();
-    setTimeout(showSidebar, 100);
-    setTimeout(showSidebar, 500);
-    setTimeout(showSidebar, 1000);
+    fixLayout();
+    setTimeout(fixLayout, 100);
+    setTimeout(fixLayout, 500);
+    setTimeout(fixLayout, 1000);
+    setTimeout(fixLayout, 2000);
 });
 </script>
 """, unsafe_allow_html=True)
