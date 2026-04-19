@@ -99,9 +99,53 @@ div[data-testid="stSidebar"],
     left: 0 !important;
     top: 0 !important;
     height: 100vh !important;
-    z-index: 999 !important;
+    z-index: 9999 !important;
     background: #0d0f14 !important;
     border-right: 1px solid rgba(255,255,255,0.07) !important;
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+}
+
+/* Chrome-specific sidebar fixes */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    [data-testid="stSidebar"] {
+        display: block !important;
+        visibility: visible !important;
+        width: 320px !important;
+        min-width: 320px !important;
+        max-width: 320px !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        background: #0d0f14 !important;
+        border-right: 1px solid rgba(255,255,255,0.07) !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        -webkit-transform: translateX(0) !important;
+        -webkit-opacity: 1 !important;
+    }
+}
+
+/* Firefox fallback */
+@-moz-document url-prefix() {
+    [data-testid="stSidebar"] {
+        display: block !important;
+        visibility: visible !important;
+        width: 320px !important;
+        min-width: 320px !important;
+        max-width: 320px !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        background: #0d0f14 !important;
+        border-right: 1px solid rgba(255,255,255,0.07) !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
 }
 
 /* Adjust main content to account for fixed sidebar */
@@ -443,22 +487,52 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 </style>
 
 <script>
-// Emergency sidebar fix for Render
+// Cross-browser sidebar fix for Render
 document.addEventListener('DOMContentLoaded', function() {
-    const emergencyFix = () => {
-        // Force sidebar with fixed positioning
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    const isFirefox = /Firefox/.test(navigator.userAgent);
+    
+    const crossBrowserFix = () => {
+        // Force sidebar with browser-specific fixes
         const sidebar = document.querySelector('[data-testid="stSidebar"]');
         if (sidebar) {
+            // Base styles for all browsers
             sidebar.style.position = 'fixed !important';
             sidebar.style.left = '0 !important';
             sidebar.style.top = '0 !important';
             sidebar.style.width = '320px !important';
             sidebar.style.height = '100vh !important';
-            sidebar.style.zIndex = '999 !important';
+            sidebar.style.zIndex = '9999 !important';
             sidebar.style.display = 'block !important';
             sidebar.style.visibility = 'visible !important';
             sidebar.style.background = '#0d0f14 !important';
             sidebar.style.borderRight = '1px solid rgba(255,255,255,0.07) !important';
+            sidebar.style.transform = 'translateX(0) !important';
+            sidebar.style.opacity = '1 !important';
+            
+            // Chrome-specific fixes
+            if (isChrome) {
+                sidebar.style.setProperty('display', 'block', 'important');
+                sidebar.style.setProperty('visibility', 'visible', 'important');
+                sidebar.style.setProperty('position', 'fixed', 'important');
+                sidebar.style.setProperty('left', '0', 'important');
+                sidebar.style.setProperty('top', '0', 'important');
+                sidebar.style.setProperty('width', '320px', 'important');
+                sidebar.style.setProperty('height', '100vh', 'important');
+                sidebar.style.setProperty('z-index', '9999', 'important');
+                sidebar.style.setProperty('background', '#0d0f14', 'important');
+                sidebar.style.setProperty('transform', 'translateX(0)', 'important');
+                sidebar.style.setProperty('opacity', '1', 'important');
+                sidebar.style.setProperty('-webkit-transform', 'translateX(0)', 'important');
+                sidebar.style.setProperty('-webkit-opacity', '1', 'important');
+            }
+            
+            // Firefox-specific fixes
+            if (isFirefox) {
+                sidebar.style.setProperty('display', 'block', 'important');
+                sidebar.style.setProperty('visibility', 'visible', 'important');
+                sidebar.style.setProperty('position', 'fixed', 'important');
+            }
         }
         
         // Adjust main content for fixed sidebar
@@ -466,23 +540,40 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mainContent) {
             mainContent.style.marginLeft = '320px !important';
             mainContent.style.width = 'calc(100% - 320px) !important';
+            
+            if (isChrome) {
+                mainContent.style.setProperty('margin-left', '320px', 'important');
+                mainContent.style.setProperty('width', 'calc(100% - 320px)', 'important');
+            }
         }
         
-        // Force all sidebar elements visible
+        // Force all sidebar elements visible with browser-specific methods
         const allSidebarElements = document.querySelectorAll('[data-testid="stSidebar"], .css-1lcbmhc, .css-1d391kg, .css-17eqqhr');
         allSidebarElements.forEach(el => {
             el.style.display = 'block !important';
             el.style.visibility = 'visible !important';
+            
+            if (isChrome) {
+                el.style.setProperty('display', 'block', 'important');
+                el.style.setProperty('visibility', 'visible', 'important');
+            }
         });
     };
     
-    // Run aggressively
-    emergencyFix();
-    setTimeout(emergencyFix, 50);
-    setTimeout(emergencyFix, 200);
-    setTimeout(emergencyFix, 500);
-    setTimeout(emergencyFix, 1000);
-    setTimeout(emergencyFix, 2000);
+    // Run aggressively with more frequent checks for Chrome
+    crossBrowserFix();
+    setTimeout(crossBrowserFix, 10);
+    setTimeout(crossBrowserFix, 50);
+    setTimeout(crossBrowserFix, 100);
+    setTimeout(crossBrowserFix, 200);
+    setTimeout(crossBrowserFix, 500);
+    setTimeout(crossBrowserFix, 1000);
+    setTimeout(crossBrowserFix, 2000);
+    
+    // Additional checks for Chrome
+    if (isChrome) {
+        setInterval(crossBrowserFix, 3000);
+    }
 });
 </script>
 """, unsafe_allow_html=True)
