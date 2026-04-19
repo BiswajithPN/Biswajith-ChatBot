@@ -37,20 +37,40 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
 
 .block-container { max-width: 100% !important; padding: 0.6rem 0.9rem 0.5rem !important; }
 
+/* Force sidebar to always be visible on Render */
 [data-testid="stSidebar"] {
     background: #0d0f14 !important;
     border-right: 1px solid rgba(255,255,255,0.07) !important;
+    display: block !important;
+    visibility: visible !important;
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    position: relative !important;
+    opacity: 1 !important;
 }
 [data-testid="stSidebar"] * { color: #e8eaf0 !important; }
 [data-testid="stSidebar"] > div:first-child { padding: 1rem 0.8rem !important; }
 
-/* Hide sidebar collapse button */
-[data-testid="stSidebar"] button,
+/* Hide sidebar close button to keep sidebar visible */
 [data-testid="stSidebarNav"] button,
-button[aria-label*="collapse"],
-button[aria-label*="Close"],
+.stSidebarNav button,
+[aria-label="Close sidebar"],
+[data-testid="stSidebarNav"] [aria-label*="Close"],
 [data-testid="stSidebarNav"] [aria-label*="collapse"] {
     display: none !important;
+}
+
+/* Force sidebar content to be visible */
+[data-testid="stSidebar"] > div {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Additional Render-specific sidebar fixes */
+.css-1lcbmhc, .css-1d391kg, .css-17eqqhr {
+    display: block !important;
+    visibility: visible !important;
 }
 
 .avatar {
