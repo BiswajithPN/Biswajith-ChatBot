@@ -73,6 +73,35 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
     visibility: visible !important;
 }
 
+/* More aggressive sidebar targeting */
+section[data-testid="stSidebar"],
+div[data-testid="stSidebar"],
+.stSidebar,
+.streamlit-sidebar,
+.sidebar {
+    display: block !important;
+    visibility: visible !important;
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    position: relative !important;
+    opacity: 1 !important;
+}
+
+/* Force app layout to show sidebar */
+[data-testid="stAppViewContainer"] > div,
+[data-testid="element-container"] > div {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+/* Hide any collapse buttons */
+button[aria-label*="sidebar"],
+button[aria-label*="collapse"],
+.stSidebar button {
+    display: none !important;
+}
+
 .avatar {
     width: 56px; height: 56px;
     border-radius: 18px;
@@ -396,6 +425,41 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
     }
 }
 </style>
+
+<script>
+// Force sidebar to be visible on Render
+document.addEventListener('DOMContentLoaded', function() {
+    // Multiple attempts to ensure sidebar is visible
+    const showSidebar = () => {
+        const sidebar = document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar) {
+            sidebar.style.display = 'block !important';
+            sidebar.style.visibility = 'visible !important';
+            sidebar.style.width = '320px !important';
+            sidebar.style.minWidth = '320px !important';
+            sidebar.style.maxWidth = '320px !important';
+            sidebar.style.position = 'relative !important';
+            sidebar.style.opacity = '1 !important';
+        }
+        
+        // Try multiple class selectors
+        const sidebarClasses = ['.css-1lcbmhc', '.css-1d391kg', '.css-17eqqhr'];
+        sidebarClasses.forEach(cls => {
+            const element = document.querySelector(cls);
+            if (element) {
+                element.style.display = 'block !important';
+                element.style.visibility = 'visible !important';
+            }
+        });
+    };
+    
+    // Run immediately and multiple times
+    showSidebar();
+    setTimeout(showSidebar, 100);
+    setTimeout(showSidebar, 500);
+    setTimeout(showSidebar, 1000);
+});
+</script>
 """, unsafe_allow_html=True)
 
 KNOWLEDGE_BASE = """
