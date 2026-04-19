@@ -459,41 +459,49 @@ textarea[placeholder="Ask about Biswajith..."]:focus {
 
 .stSpinner > div { border-top-color: #d5af67 !important; }
 
-@media (max-width: 640px) {
-    /* Mobile sidebar fixes */
-    [data-testid="stSidebar"] {
-        width: 280px !important;
-        min-width: 280px !important;
-        max-width: 280px !important;
-        position: fixed !important;
-        left: 0 !important;
-        top: 0 !important;
-        height: 100vh !important;
-        z-index: 9999 !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
+@media (max-width: 768px) {
+    /* Hide sidebar completely on mobile - show only chat */
+    [data-testid="stSidebar"],
+    [data-testid="stSidebarNav"],
+    section[data-testid="stSidebar"] {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
     }
     
-    /* Mobile main content adjustments */
+    /* Mobile main content adjustments - full width */
     .main,
-    [data-testid="stMain"] {
-        margin-left: 280px !important;
-        width: calc(100% - 280px) !important;
+    [data-testid="stMain"],
+    section.main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
         padding: 0 !important;
     }
     
     .block-container { 
-        padding: 0.3rem 0.55rem 0.75rem !important; 
+        padding: 0.5rem 0.8rem 0.75rem !important; 
         max-width: 100% !important;
         width: 100% !important;
         box-sizing: border-box !important;
+        margin: 0 !important;
     }
     
-    .header-bar { padding: 0.3rem 0 0.45rem; }
-    [data-testid="stChatMessageContent"] { padding: 0.6rem 0.75rem !important; border-radius: 13px !important; }
-    .chips-row { gap: 0.28rem; }
-    .chip { padding: 0.3rem 0.6rem; font-size: 0.68rem; }
-    .online-badge { font-size: 0.68rem; padding: 0.28rem 0.55rem; }
+    .header-bar { padding: 0.5rem 0 0.6rem; }
+    .header-title { font-size: 1.5rem !important; }
+    .header-sub { font-size: 0.8rem !important; }
+    
+    [data-testid="stChatMessageContent"] { 
+        padding: 0.7rem 0.85rem !important; 
+        border-radius: 14px !important; 
+        font-size: 0.9rem !important;
+    }
+    
+    .chips-row { gap: 0.3rem; padding: 0.5rem 0; }
+    .chip { padding: 0.35rem 0.65rem; font-size: 0.7rem; }
+    .online-badge { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
     
     [data-testid="stChatInput"] textarea, [data-testid="stChatInputContainer"] textarea,
     div[data-testid="stChatInput"] > div > div > textarea, div[data-testid="stChatInput"] div div textarea,
