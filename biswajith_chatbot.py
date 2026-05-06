@@ -16,6 +16,250 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* Custom Premium Loading Screen */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at center, rgba(191,148,79,0.15) 0%, transparent 50%),
+        linear-gradient(160deg, #0d0f14 0%, #0a0b0f 100%);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+}
+
+/* Animated Logo/Icon */
+.stApp::after {
+    content: '🧠';
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    z-index: 100001;
+    animation: 
+        logoFloat 2s ease-in-out infinite,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+    filter: drop-shadow(0 0 30px rgba(191,148,79,0.6));
+}
+
+/* Brand Name */
+html::after {
+    content: 'Biswajith AI';
+    position: fixed;
+    top: 52%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    z-index: 100001;
+    animation: 
+        fadeIn 0.8s ease-out 0.3s backwards,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+    text-shadow: 0 2px 20px rgba(191,148,79,0.4);
+    background: linear-gradient(135deg, #f0f2f5, #d5af67);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Spinning Ring */
+body::before {
+    content: '';
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    border: 3px solid transparent;
+    border-top-color: #d5af67;
+    border-right-color: #d5af67;
+    border-radius: 50%;
+    z-index: 100000;
+    animation: 
+        spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+    box-shadow: 
+        0 0 20px rgba(191,148,79,0.4),
+        inset 0 0 20px rgba(191,148,79,0.2);
+}
+
+/* Tagline */
+nav::before {
+    content: 'Your AI Assistant';
+    position: fixed;
+    top: 56%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d5af67;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    z-index: 100001;
+    animation: 
+        fadeIn 0.8s ease-out 0.5s backwards,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+/* Loading Text */
+body::after {
+    content: 'Initializing chatbot...';
+    position: fixed;
+    top: 62%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8a98ac;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    z-index: 100001;
+    animation: 
+        textPulse 2s ease-in-out infinite,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    pointer-events: none;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Progress Bar */
+html::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #d5af67, #f4dd9f);
+    z-index: 100002;
+    animation: 
+        progressBar 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+        hideLoader 0.4s ease-out 2.5s forwards;
+    box-shadow: 0 0 10px rgba(191,148,79,0.6);
+}
+
+@keyframes progressBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Floating particles effect */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+}
+
+/* Mobile optimizations for loading screen */
+@media (max-width: 768px) {
+    .stApp::after {
+        font-size: 2.5rem !important;
+        top: 40% !important;
+    }
+    
+    html::after {
+        font-size: 1.3rem !important;
+        top: 48% !important;
+    }
+    
+    nav::before {
+        font-size: 0.65rem !important;
+        top: 53% !important;
+    }
+    
+    body::after {
+        font-size: 0.7rem !important;
+        top: 60% !important;
+    }
+    
+    body::before {
+        width: 60px !important;
+        height: 60px !important;
+        margin: -30px 0 0 -30px !important;
+        border-width: 2.5px !important;
+        top: 40% !important;
+    }
+    
+    html::before {
+        height: 2px !important;
+    }
+    
+    .stApp > div:first-child::before,
+    .stApp > div:first-child::after {
+        display: none !important;
+    }
+}
+
+.stApp > div:first-child::before {
+    content: '✨';
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: float 3s ease-in-out infinite, hideLoader 0.4s ease-out 2.5s forwards;
+    z-index: 100000;
+}
+
+.stApp > div:first-child::after {
+    content: '💫';
+    position: absolute;
+    top: 40%;
+    right: 25%;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: float 3s ease-in-out 0.5s infinite, hideLoader 0.4s ease-out 2.5s forwards;
+    z-index: 100000;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+    50% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes hideLoader {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Hide Streamlit default skeleton */
+[data-testid="stAppViewContainer"] > div:first-child > div:first-child {
+    background: transparent !important;
+}
+
+div[data-testid="stVerticalBlock"] > div:empty,
+div[class*="skeleton"],
+.element-container:empty {
+    display: none !important;
+    opacity: 0 !important;
+}
+
 html, body { background: #0a0b0f !important; }
 
 body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"],
@@ -35,6 +279,76 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
     display: none !important;
 }
 
+/* Smooth animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+/* Loading skeleton effect */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(191,148,79,0.05) 50%, 
+        transparent 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Apply animations with delay to sync with loading */
+.stApp {
+    animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.9s backwards;
+}
+
+@keyframes fadeInScale {
+    from { 
+        opacity: 0; 
+        transform: scale(0.95);
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+
+.main, [data-testid="stMain"] {
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 3s backwards;
+}
+
 .block-container { max-width: 100% !important; padding: 0.6rem 0.9rem 0.5rem !important; }
 
 /* Force sidebar to always be visible on Render */
@@ -48,6 +362,7 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
     max-width: 320px !important;
     position: relative !important;
     opacity: 1 !important;
+    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.9s backwards;
 }
 [data-testid="stSidebar"] * { color: #e8eaf0 !important; }
 [data-testid="stSidebar"] > div:first-child { padding: 1rem 0.8rem !important; }
@@ -170,6 +485,12 @@ button[aria-label*="collapse"],
     font-size: 1.5rem;
     margin: 0 auto 0.65rem;
     box-shadow: 0 8px 24px rgba(191,148,79,0.25);
+    animation: pulse 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .profile-name {
@@ -211,7 +532,22 @@ button[aria-label*="collapse"],
     margin-bottom: 0.4rem;
     font-size: 0.78rem;
     color: #c8d0db !important;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out backwards;
 }
+
+.info-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(191,148,79,0.3);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(191,148,79,0.15);
+}
+
+.info-card:nth-child(1) { animation-delay: 0.1s; }
+.info-card:nth-child(2) { animation-delay: 0.2s; }
+.info-card:nth-child(3) { animation-delay: 0.3s; }
+.info-card:nth-child(4) { animation-delay: 0.4s; }
+.info-card:nth-child(5) { animation-delay: 0.5s; }
 
 .info-card strong { color: #edf2f7 !important; }
 
@@ -240,14 +576,16 @@ button[aria-label*="collapse"],
     font-family: 'Inter', sans-serif !important;
     font-size: 0.82rem !important;
     padding: 0.5rem 1rem !important;
-    transition: all 0.18s !important;
+    transition: all 0.3s ease !important;
     width: 100%;
 }
 
 .stButton > button:hover {
-    background: rgba(191,148,79,0.1) !important;
-    border-color: rgba(191,148,79,0.3) !important;
+    background: rgba(191,148,79,0.15) !important;
+    border-color: rgba(191,148,79,0.4) !important;
     color: #f5e6bc !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(191,148,79,0.2) !important;
 }
 
 .header-bar {
@@ -297,6 +635,8 @@ button[aria-label*="collapse"],
     border-radius: 50%;
     background: #22c55e;
     display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(34,197,94,0.5);
 }
 
 .chips-row {
@@ -316,7 +656,23 @@ button[aria-label*="collapse"],
     font-size: clamp(0.68rem, 1.8vw, 0.8rem);
     white-space: nowrap;
     cursor: pointer;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out backwards;
 }
+
+.chip:hover {
+    background: rgba(191,148,79,0.15);
+    border-color: rgba(191,148,79,0.4);
+    color: #f5e6bc !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(191,148,79,0.2);
+}
+
+.chip:nth-child(1) { animation-delay: 0.1s; }
+.chip:nth-child(2) { animation-delay: 0.2s; }
+.chip:nth-child(3) { animation-delay: 0.3s; }
+.chip:nth-child(4) { animation-delay: 0.4s; }
+.chip:nth-child(5) { animation-delay: 0.5s; }
 
 .chat-meta {
     display: flex;
@@ -338,6 +694,7 @@ button[aria-label*="collapse"],
     border: none !important;
     padding: 0 !important;
     margin-bottom: 0.65rem !important;
+    animation: fadeIn 0.5s ease-out;
 }
 
 [data-testid="chatAvatarIcon-assistant"] {
