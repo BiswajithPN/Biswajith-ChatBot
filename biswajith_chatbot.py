@@ -8,13 +8,13 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 st.set_page_config(
     page_title="Chat with Biswajith",
-    page_icon="🤖",
+    page_icon="✨",
     layout="wide"
 )
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /* Custom Premium Loading Screen */
 .stApp::before {
@@ -37,42 +37,27 @@ st.markdown("""
 
 /* Animated Logo/Icon */
 .stApp::after {
-    content: '🧠';
+    content: '';
     position: fixed;
     top: 45%;
     left: 50%;
+    width: 120px;
+    height: 120px;
     transform: translate(-50%, -50%);
-    font-size: 3.5rem;
     z-index: 100001;
     animation: 
-        logoFloat 2s ease-in-out infinite,
+        fadeInScale 1.2s ease-out forwards,
         hideLoader 0.4s ease-out 2.5s forwards;
     pointer-events: none;
-    filter: drop-shadow(0 0 30px rgba(191,148,79,0.6));
+    background: radial-gradient(circle at 30% 30%, rgba(100, 200, 255, 0.8), rgba(0, 150, 255, 0.4));
+    border-radius: 50%;
+    filter: blur(25px);
+    box-shadow: 0 0 60px rgba(0, 102, 255, 0.6);
 }
 
 /* Brand Name */
 html::after {
-    content: 'Biswajith AI';
-    position: fixed;
-    top: 52%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #f0f2f5;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    z-index: 100001;
-    animation: 
-        fadeIn 0.8s ease-out 0.3s backwards,
-        hideLoader 0.4s ease-out 2.5s forwards;
-    pointer-events: none;
-    text-shadow: 0 2px 20px rgba(191,148,79,0.4);
-    background: linear-gradient(135deg, #f0f2f5, #d5af67);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    content: none !important;
 }
 
 /* Spinning Ring */
@@ -100,41 +85,12 @@ body::before {
 
 /* Tagline */
 nav::before {
-    content: 'Your AI Assistant';
-    position: fixed;
-    top: 56%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #d5af67;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    z-index: 100001;
-    animation: 
-        fadeIn 0.8s ease-out 0.5s backwards,
-        hideLoader 0.4s ease-out 2.5s forwards;
-    pointer-events: none;
-    text-transform: uppercase;
+    content: none !important;
 }
 
 /* Loading Text */
 body::after {
-    content: 'Initializing chatbot...';
-    position: fixed;
-    top: 62%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #8a98ac;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    z-index: 100001;
-    animation: 
-        textPulse 2s ease-in-out infinite,
-        hideLoader 0.4s ease-out 2.5s forwards;
-    pointer-events: none;
+    content: none !important;
 }
 
 @keyframes textPulse {
@@ -260,19 +216,23 @@ div[class*="skeleton"],
     opacity: 0 !important;
 }
 
-html, body { background: #0a0b0f !important; }
+html, body { background: #02050c !important; }
 
 body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"],
 section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
-    background: #0a0b0f !important;
+    background: #02050c !important;
     color: #e8eaf0 !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .stApp {
-    background: radial-gradient(ellipse at top left, rgba(191,148,79,0.10) 0%, transparent 40%),
-                linear-gradient(160deg, #0d0f14 0%, #0a0b0f 100%) !important;
+    background: radial-gradient(circle at top left, rgba(50, 115, 255, 0.08), transparent 18%),
+                radial-gradient(circle at 80% 20%, rgba(0, 180, 255, 0.08), transparent 18%),
+                linear-gradient(180deg, #040a14 0%, #04070f 100%) !important;
     min-height: 100vh;
+    background-image: linear-gradient(rgba(100,150,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(100,150,255,0.05) 1px, transparent 1px), radial-gradient(circle at 20% 20%, rgba(100,150,255,0.06), transparent 5%), radial-gradient(circle at 80% 10%, rgba(100,150,255,0.06), transparent 4%);
+    background-size: 80px 80px, 80px 80px, 320px 320px, 260px 260px;
+    background-blend-mode: screen, screen, normal, normal;
 }
 
 [data-testid="stHeader"], footer, #MainMenu, [data-testid="stToolbar"], [data-testid="stDecoration"] {
@@ -353,8 +313,10 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
 
 /* Force sidebar to always be visible on Render */
 [data-testid="stSidebar"] {
-    background: #0d0f14 !important;
-    border-right: 1px solid rgba(255,255,255,0.07) !important;
+    background: rgba(8, 14, 28, 0.92) !important;
+    border-right: 1px solid rgba(100, 150, 255, 0.16) !important;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.35) !important;
+    backdrop-filter: blur(18px) !important;
     display: block !important;
     visibility: visible !important;
     width: 320px !important;
@@ -365,7 +327,7 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
     animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.9s backwards;
 }
 [data-testid="stSidebar"] * { color: #e8eaf0 !important; }
-[data-testid="stSidebar"] > div:first-child { padding: 1rem 0.8rem !important; }
+[data-testid="stSidebar"] > div:first-child { padding: 1.2rem 0.9rem !important; }
 
 /* Hide sidebar close button to keep sidebar visible */
 [data-testid="stSidebarNav"] button,
@@ -415,8 +377,10 @@ div[data-testid="stSidebar"],
     top: 0 !important;
     height: 100vh !important;
     z-index: 9999 !important;
-    background: #0d0f14 !important;
-    border-right: 1px solid rgba(255,255,255,0.07) !important;
+    background: rgba(8, 14, 28, 0.92) !important;
+    border-right: 1px solid rgba(100, 150, 255, 0.16) !important;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.35) !important;
+    backdrop-filter: blur(18px) !important;
     transform: translateX(0) !important;
     opacity: 1 !important;
 }
@@ -478,69 +442,105 @@ button[aria-label*="collapse"],
 }
 
 .avatar {
-    width: 56px; height: 56px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #d5af67, #9a6f2e);
+    width: 90px; height: 90px;
+    border-radius: 24px;
+    background: rgba(12, 20, 40, 0.78);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem;
-    margin: 0 auto 0.65rem;
-    box-shadow: 0 8px 24px rgba(191,148,79,0.25);
-    animation: pulse 3s ease-in-out infinite;
-    transition: transform 0.3s ease;
+    margin: 0 auto 1rem;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+    position: relative;
+    border: 1px solid rgba(100, 150, 255, 0.18);
+    overflow: hidden;
+}
+
+.avatar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(100,200,255,0.18), transparent 42%);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.avatar-badge {
+    width: 70px; height: 70px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0,120,255,0.94), rgba(0,80,210,0.95));
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.06rem;
+    box-shadow: 0 18px 34px rgba(0,100,255,0.35);
 }
 
 .avatar:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: translateY(-3px);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .profile-name {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #f3f4f6 !important;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff !important;
     text-align: center;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.3rem;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    letter-spacing: -0.015em;
+    background: linear-gradient(135deg, #ffffff, #64c8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .profile-role {
-    font-size: 0.78rem;
-    color: #8a98ac !important;
+    font-size: 0.75rem;
+    color: #7fa8d1 !important;
     text-align: center;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
 }
 
 .profile-bio {
-    font-size: 0.8rem;
-    color: #b0bac7 !important;
+    font-size: 0.85rem;
+    color: #b8cde8 !important;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: 0.2px;
 }
 
 .section-label {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 800;
     letter-spacing: 0.15em;
-    color: #d4ac63 !important;
+    color: #64c8ff !important;
     text-transform: uppercase;
-    margin: 1rem 0 0.4rem;
+    margin: 1.2rem 0 0.7rem;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .info-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(100, 150, 200, 0.06);
+    border: 1px solid rgba(100, 150, 200, 0.12);
     border-radius: 12px;
-    padding: 0.6rem 0.75rem;
-    margin-bottom: 0.4rem;
-    font-size: 0.78rem;
-    color: #c8d0db !important;
-    transition: all 0.3s ease;
+    padding: 0.75rem 0.9rem;
+    margin-bottom: 0.55rem;
+    font-size: 0.82rem;
+    color: #c5d8f0 !important;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
     animation: fadeIn 0.5s ease-out backwards;
+    font-weight: 500;
+    letter-spacing: 0.2px;
 }
 
 .info-card:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(191,148,79,0.3);
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(191,148,79,0.15);
+    background: rgba(100, 200, 255, 0.12);
+    border-color: rgba(100, 200, 255, 0.25);
+    transform: translateX(4px);
+    box-shadow: 0 6px 16px rgba(0, 102, 200, 0.15);
 }
 
 .info-card:nth-child(1) { animation-delay: 0.1s; }
@@ -560,32 +560,35 @@ button[aria-label*="collapse"],
 
 .tag {
     display: inline-block;
-    background: rgba(191,148,79,0.08);
-    border: 1px solid rgba(191,148,79,0.2);
+    background: rgba(100, 150, 200, 0.1);
+    border: 1px solid rgba(100, 150, 200, 0.2);
     border-radius: 999px;
-    padding: 0.28rem 0.6rem;
-    font-size: 0.7rem;
-    color: #e3c97a !important;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    color: #7fa8d1 !important;
+    font-weight: 500;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .stButton > button {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    color: #d0d5dd !important;
+    background: rgba(100, 150, 200, 0.12) !important;
+    border: 1px solid rgba(100, 150, 200, 0.2) !important;
+    color: #c5d8f0 !important;
     border-radius: 10px !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-size: 0.82rem !important;
     padding: 0.5rem 1rem !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
     width: 100%;
+    font-weight: 500 !important;
 }
 
 .stButton > button:hover {
-    background: rgba(191,148,79,0.15) !important;
-    border-color: rgba(191,148,79,0.4) !important;
-    color: #f5e6bc !important;
+    background: rgba(0, 150, 255, 0.18) !important;
+    border-color: rgba(0, 150, 255, 0.3) !important;
+    color: #64c8ff !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(191,148,79,0.2) !important;
+    box-shadow: 0 6px 16px rgba(0, 102, 200, 0.2) !important;
 }
 
 .header-bar {
@@ -601,42 +604,49 @@ button[aria-label*="collapse"],
 .header-left { min-width: 0; flex: 1; }
 
 .header-title {
-    font-size: clamp(1.25rem, 4vw, 2rem);
-    font-weight: 700;
-    color: #f0f2f5 !important;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 900;
+    color: #ffffff !important;
+    letter-spacing: -0.025em;
     margin: 0;
     line-height: 1.15;
     word-break: break-word;
+    background: linear-gradient(135deg, #ffffff, #64c8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .header-sub {
-    font-size: clamp(0.75rem, 2.2vw, 0.88rem);
-    color: #7a8799 !important;
-    margin-top: 0.25rem;
+    font-size: clamp(0.82rem, 2.2vw, 0.97rem);
+    color: #8fa5c2 !important;
+    margin-top: 0.45rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
 }
 
 .online-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.35rem 0.7rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 999px;
-    background: rgba(34,197,94,0.1);
-    border: 1px solid rgba(34,197,94,0.25);
-    color: #86efac !important;
-    font-size: 0.72rem;
+    background: rgba(0, 150, 255, 0.12);
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    color: #64c8ff !important;
+    font-size: 0.75rem;
     white-space: nowrap;
     flex-shrink: 0;
+    font-weight: 500;
 }
 
 .online-dot {
-    width: 7px; height: 7px;
+    width: 8px; height: 8px;
     border-radius: 50%;
-    background: #22c55e;
+    background: #00d4ff;
     display: inline-block;
     animation: pulse 2s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(34,197,94,0.5);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
 }
 
 .chips-row {
@@ -648,24 +658,26 @@ button[aria-label*="collapse"],
 }
 
 .chip {
-    padding: 0.38rem 0.75rem;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #c8d0db !important;
-    font-size: clamp(0.68rem, 1.8vw, 0.8rem);
+    padding: 0.5rem 1.1rem;
+    border-radius: 20px;
+    background: rgba(100, 150, 200, 0.08);
+    border: 1px solid rgba(100, 150, 200, 0.2);
+    color: #c5d8f0 !important;
+    font-size: 0.82rem;
     white-space: nowrap;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
     animation: fadeIn 0.6s ease-out backwards;
+    font-weight: 500;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .chip:hover {
-    background: rgba(191,148,79,0.15);
-    border-color: rgba(191,148,79,0.4);
-    color: #f5e6bc !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(191,148,79,0.2);
+    background: rgba(100, 200, 255, 0.15);
+    border-color: rgba(100, 200, 255, 0.4);
+    color: #64c8ff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 102, 200, 0.2);
 }
 
 .chip:nth-child(1) { animation-delay: 0.1s; }
@@ -693,20 +705,24 @@ button[aria-label*="collapse"],
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
-    margin-bottom: 0.65rem !important;
+    margin-bottom: 1.2rem !important;
     animation: fadeIn 0.5s ease-out;
 }
 
 [data-testid="chatAvatarIcon-assistant"] {
-    background: linear-gradient(135deg, #d5af67, #9a6f2e) !important;
-    color: #111 !important;
-    border-radius: 10px !important;
+    background: linear-gradient(135deg, #0066ff, #0099ff) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3) !important;
+    border: 1px solid rgba(0, 150, 255, 0.2) !important;
 }
 
 [data-testid="chatAvatarIcon-user"] {
-    background: rgba(255,255,255,0.08) !important;
-    color: #e0e6ef !important;
-    border-radius: 10px !important;
+    background: rgba(100, 150, 200, 0.15) !important;
+    color: #64c8ff !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(100, 150, 200, 0.2) !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
 }
 
 [data-testid="stChatMessageContent"], [data-testid="stChatMessageContent"] p, [data-testid="stChatMessageContent"] * {
@@ -714,15 +730,19 @@ button[aria-label*="collapse"],
 }
 
 [data-testid="stChatMessageContent"] {
-    background: #141820 !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+    background: rgba(20, 30, 50, 0.4) !important;
+    border: 1px solid rgba(100, 150, 200, 0.15) !important;
     border-radius: 16px !important;
-    padding: 0.75rem 1rem !important;
-    font-size: clamp(0.84rem, 2.4vw, 0.95rem) !important;
-    line-height: 1.7 !important;
+    padding: 1.2rem 1.4rem !important;
+    font-size: 0.96rem !important;
+    line-height: 1.85 !important;
     max-width: 100% !important;
     word-break: break-word !important;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.3px !important;
 }
 
 [data-testid="stChatInputContainer"], [data-testid="stChatInput"] {
@@ -731,6 +751,7 @@ button[aria-label*="collapse"],
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     background: transparent !important;
+    box-shadow: none !important;
 }
 
 [data-testid="stChatInputContainer"] > div, [data-testid="stChatInput"] > div,
@@ -763,58 +784,71 @@ button[aria-label*="collapse"],
 [data-testid="stChatInput"] textarea, [data-testid="stChatInputContainer"] textarea,
 div[data-testid="stChatInput"] > div > div > textarea, div[data-testid="stChatInput"] div div textarea,
 .stChatInput textarea, textarea[aria-label], textarea[placeholder="Ask about Biswajith..."] {
-    background: #1a1e2a !important;
-    border: 1.5px solid rgba(191,148,79,0.25) !important;
+    background: rgba(15, 25, 45, 0.3) !important;
+    border: 1.5px solid rgba(100, 150, 200, 0.2) !important;
     color: #f0f2f6 !important;
     -webkit-text-fill-color: #f0f2f6 !important;
-    border-radius: 18px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: clamp(0.85rem, 2.3vw, 0.95rem) !important;
-    line-height: 1.6 !important;
-    min-height: 52px !important;
-    padding: 0.8rem 1rem !important;
-    caret-color: #d5af67 !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
+    border-radius: 20px !important;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+    min-height: 56px !important;
+    padding: 1rem 1.3rem !important;
+    caret-color: #64c8ff !important;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
     opacity: 1 !important;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.25) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+    resize: none !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 
 [data-testid="stChatInput"] textarea::placeholder, [data-testid="stChatInputContainer"] textarea::placeholder,
 textarea[placeholder="Ask about Biswajith..."]::placeholder {
-    color: #4e5d72 !important;
-    -webkit-text-fill-color: #4e5d72 !important;
+    color: #6a7d99 !important;
+    -webkit-text-fill-color: #6a7d99 !important;
     opacity: 1 !important;
 }
 
 [data-testid="stChatInput"] textarea:focus, [data-testid="stChatInputContainer"] textarea:focus,
 textarea[placeholder="Ask about Biswajith..."]:focus {
-    border-color: rgba(191,148,79,0.6) !important;
-    box-shadow: 0 0 0 3px rgba(191,148,79,0.12), 0 2px 16px rgba(0,0,0,0.3) !important;
+    border-color: rgba(0, 150, 255, 0.5) !important;
+    box-shadow: 0 0 0 4px rgba(100, 200, 255, 0.12), 0 8px 24px rgba(0,102,255,0.25) !important;
     outline: none !important;
-    background: #1e2330 !important;
+    background: rgba(15, 25, 50, 0.5) !important;
 }
 
 [data-testid="stChatInput"] button, [data-testid="stChatInputContainer"] button {
-    background: linear-gradient(135deg, #d5af67, #9a6f28) !important;
-    color: #0d0f14 !important;
-    border-radius: 14px !important;
+    background: linear-gradient(135deg, #0066ff, #0099ff) !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
     border: none !important;
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    flex: 0 0 44px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    flex: 0 0 48px !important;
     align-self: flex-end !important;
     margin: 0 0 4px 0 !important;
-    box-shadow: 0 4px 14px rgba(191,148,79,0.35) !important;
-    transition: opacity 0.15s, transform 0.1s !important;
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.35) !important;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.320, 1) !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 [data-testid="stChatInput"] button:hover, [data-testid="stChatInputContainer"] button:hover {
-    opacity: 0.88 !important;
-    transform: scale(1.04) !important;
+    opacity: 0.9 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 32px rgba(0, 102, 255, 0.45) !important;
 }
 
-.stSpinner > div { border-top-color: #d5af67 !important; }
+[data-testid="stChatInput"] button:active, [data-testid="stChatInputContainer"] button:active {
+    transform: scale(0.95) !important;
+}
+
+.stSpinner > div { border-top-color: #0066ff !important; }
 
 @media (max-width: 768px) {
     /* Hide sidebar completely on mobile - show only chat */
@@ -1077,7 +1111,7 @@ RULES:
 """
 
 with st.sidebar:
-    st.markdown('<div class="avatar">🧠</div>', unsafe_allow_html=True)
+    st.markdown('<div class="avatar"><div class="avatar-badge">B</div></div>', unsafe_allow_html=True)
     st.markdown('<div class="profile-name">Biswajith PN</div>', unsafe_allow_html=True)
     st.markdown('<div class="profile-role">AI & Data Science Student</div>', unsafe_allow_html=True)
     st.markdown('<div class="profile-bio">Practical builder focused on AI products and applied software work.</div>', unsafe_allow_html=True)
