@@ -16,7 +16,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
-/* Custom Premium Loading Screen */
+/* Custom Premium Loading Screen - Enhanced */
 .stApp::before {
     content: '';
     position: fixed;
@@ -25,19 +25,19 @@ st.markdown("""
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(ellipse at center, rgba(191,148,79,0.15) 0%, transparent 50%),
-        linear-gradient(160deg, #0d0f14 0%, #0a0b0f 100%);
+        radial-gradient(ellipse at center, rgba(0, 150, 255, 0.2) 0%, transparent 60%),
+        linear-gradient(135deg, #0d0f14 0%, #0a0b0f 100%);
     z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: hideLoader 0.4s ease-out 2.5s forwards;
+    animation: hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
     pointer-events: none;
 }
 
-/* Animated Logo/Icon */
+/* Animated Logo/Icon - Smooth entrance */
 .stApp::after {
-    content: '';
+    content: 'BP';
     position: fixed;
     top: 45%;
     left: 50%;
@@ -46,56 +46,87 @@ st.markdown("""
     transform: translate(-50%, -50%);
     z-index: 100001;
     animation: 
-        fadeInScale 1.2s ease-out forwards,
-        hideLoader 0.4s ease-out 2.5s forwards;
+        iconBounce 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+        hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
     pointer-events: none;
-    background: radial-gradient(circle at 30% 30%, rgba(100, 200, 255, 0.8), rgba(0, 150, 255, 0.4));
-    border-radius: 50%;
-    filter: blur(25px);
-    box-shadow: 0 0 60px rgba(0, 102, 255, 0.6);
-}
-
-/* Brand Name */
-html::after {
-    content: none !important;
-}
-
-/* Spinning Ring */
-body::before {
-    content: '';
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    width: 80px;
-    height: 80px;
-    margin: -40px 0 0 -40px;
-    border: 3px solid transparent;
-    border-top-color: #d5af67;
-    border-right-color: #d5af67;
-    border-radius: 50%;
-    z-index: 100000;
-    animation: 
-        spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite,
-        hideLoader 0.4s ease-out 2.5s forwards;
-    pointer-events: none;
-    box-shadow: 
-        0 0 20px rgba(191,148,79,0.4),
-        inset 0 0 20px rgba(191,148,79,0.2);
-}
-
-/* Tagline */
-nav::before {
-    content: none !important;
+    font-size: 4.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 40px rgba(0, 150, 255, 0.5));
 }
 
 /* Loading Text */
 body::after {
-    content: none !important;
+    content: 'Initializing AI Assistant';
+    position: fixed;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100001;
+    color: #64c8ff;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: 0.05em;
+    text-align: center;
+    animation: 
+        textFadeInOut 1.6s ease-in-out infinite,
+        hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+    pointer-events: none;
+}
+
+@keyframes textFadeInOut {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Spinning Ring - Smooth and elegant */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90px;
+    height: 90px;
+    margin: -45px 0 0 -45px;
+    border: 2.5px solid transparent;
+    border-top: 2.5px solid #00d4ff;
+    border-right: 2.5px solid #0099ff;
+    border-radius: 50%;
+    z-index: 100000;
+    animation: 
+        smoothSpin 1.4s cubic-bezier(0.4, 0.2, 0.2, 0.8) infinite,
+        hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+    pointer-events: none;
+    box-shadow: 
+        0 0 25px rgba(0, 150, 255, 0.3),
+        inset 0 0 20px rgba(0, 150, 255, 0.1);
 }
 
 @keyframes textPulse {
-    0%, 100% { opacity: 0.5; }
+    0%, 100% { opacity: 0.6; }
     50% { opacity: 1; }
+}
+
+@keyframes iconBounce {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -55%) scale(1.1);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes smoothSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* Progress Bar */
@@ -105,13 +136,13 @@ html::before {
     bottom: 0;
     left: 0;
     width: 0%;
-    height: 3px;
-    background: linear-gradient(90deg, #d5af67, #f4dd9f);
+    height: 2px;
+    background: linear-gradient(90deg, #0099ff, #00d4ff, #0099ff);
     z-index: 100002;
     animation: 
-        progressBar 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-        hideLoader 0.4s ease-out 2.5s forwards;
-    box-shadow: 0 0 10px rgba(191,148,79,0.6);
+        progressBar 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+        hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+    box-shadow: 0 0 12px rgba(0, 150, 255, 0.4);
 }
 
 @keyframes progressBar {
@@ -166,24 +197,24 @@ html::before {
 }
 
 .stApp > div:first-child::before {
-    content: '✨';
+    content: '💫';
     position: absolute;
-    top: 30%;
-    left: 20%;
-    font-size: 1.5rem;
+    top: 25%;
+    left: 15%;
+    font-size: 1.8rem;
     opacity: 0;
-    animation: float 3s ease-in-out infinite, hideLoader 0.4s ease-out 2.5s forwards;
+    animation: float 3s ease-in-out infinite, hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
     z-index: 100000;
 }
 
 .stApp > div:first-child::after {
-    content: '💫';
+    content: '✨';
     position: absolute;
-    top: 40%;
-    right: 25%;
-    font-size: 1.2rem;
+    top: 35%;
+    right: 20%;
+    font-size: 1.5rem;
     opacity: 0;
-    animation: float 3s ease-in-out 0.5s infinite, hideLoader 0.4s ease-out 2.5s forwards;
+    animation: float 3s ease-in-out 0.3s infinite, hideLoader 0.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
     z-index: 100000;
 }
 
@@ -201,6 +232,7 @@ html::before {
     to {
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
     }
 }
 
@@ -291,7 +323,7 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
 
 /* Apply animations with delay to sync with loading */
 .stApp {
-    animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.9s backwards;
+    animation: fadeInScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards;
 }
 
 @keyframes fadeInScale {
@@ -306,7 +338,7 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
 }
 
 .main, [data-testid="stMain"] {
-    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 3s backwards;
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.1s backwards;
 }
 
 .block-container { max-width: 100% !important; padding: 0.6rem 0.9rem 0.5rem !important; }
@@ -324,7 +356,7 @@ section.main, .main > div, .block-container, [class^="css"], [class*=" css"] {
     max-width: 320px !important;
     position: relative !important;
     opacity: 1 !important;
-    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.9s backwards;
+    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards;
 }
 [data-testid="stSidebar"] * { color: #e8eaf0 !important; }
 [data-testid="stSidebar"] > div:first-child { padding: 1.2rem 0.9rem !important; }
@@ -442,105 +474,118 @@ button[aria-label*="collapse"],
 }
 
 .avatar {
-    width: 90px; height: 90px;
-    border-radius: 24px;
-    background: rgba(12, 20, 40, 0.78);
+    width: 110px; height: 110px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(0, 100, 255, 0.12), rgba(0, 150, 255, 0.08));
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1rem;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 24px 60px rgba(0, 102, 200, 0.25), inset 0 1px 0 rgba(255,255,255,0.12);
     position: relative;
-    border: 1px solid rgba(100, 150, 255, 0.18);
+    border: 1.5px solid rgba(0, 150, 255, 0.3);
     overflow: hidden;
+    animation: profileFloat 3s ease-in-out infinite;
 }
 
 .avatar::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top left, rgba(100,200,255,0.18), transparent 42%);
+    background: radial-gradient(circle at 30% 30%, rgba(100,200,255,0.25), transparent 50%);
     border-radius: inherit;
     pointer-events: none;
 }
 
 .avatar-badge {
-    width: 70px; height: 70px;
+    width: 85px; height: 85px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(0,120,255,0.94), rgba(0,80,210,0.95));
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0066ff 0%, #0099ff 50%, #00d4ff 100%);
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: 1.95rem;
     font-weight: 900;
-    letter-spacing: -0.06rem;
-    box-shadow: 0 18px 34px rgba(0,100,255,0.35);
+    letter-spacing: 0.08rem;
+    box-shadow: 0 20px 40px rgba(0,102,255,0.4), inset 0 1px 1px rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .avatar:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 28px 70px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 32px 80px rgba(0, 102, 200, 0.35), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+@keyframes profileFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 }
 
 .profile-name {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 900;
     color: #ffffff !important;
     text-align: center;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    letter-spacing: -0.015em;
-    background: linear-gradient(135deg, #ffffff, #64c8ff);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #64c8ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: fadeIn 0.6s ease-out 0.3s backwards;
 }
 
 .profile-role {
-    font-size: 0.75rem;
-    color: #7fa8d1 !important;
+    font-size: 0.73rem;
+    color: #00d4ff !important;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.35px;
     text-transform: uppercase;
+    animation: fadeIn 0.6s ease-out 0.4s backwards;
 }
 
 .profile-bio {
-    font-size: 0.85rem;
-    color: #b8cde8 !important;
+    font-size: 0.87rem;
+    color: #d4dce6 !important;
     text-align: center;
     line-height: 1.7;
     font-weight: 500;
     letter-spacing: 0.2px;
+    animation: fadeIn 0.6s ease-out 0.5s backwards;
 }
 
 .section-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 800;
-    letter-spacing: 0.15em;
-    color: #64c8ff !important;
+    letter-spacing: 0.2em;
+    color: #00d4ff !important;
     text-transform: uppercase;
-    margin: 1.2rem 0 0.7rem;
+    margin: 1.3rem 0 0.8rem;
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    opacity: 0.9;
 }
 
 .info-card {
-    background: rgba(100, 150, 200, 0.06);
-    border: 1px solid rgba(100, 150, 200, 0.12);
-    border-radius: 12px;
-    padding: 0.75rem 0.9rem;
-    margin-bottom: 0.55rem;
-    font-size: 0.82rem;
-    color: #c5d8f0 !important;
+    background: linear-gradient(135deg, rgba(0, 100, 255, 0.08), rgba(0, 150, 255, 0.04));
+    border: 1px solid rgba(0, 150, 255, 0.18);
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.81rem;
+    color: #d4dce6 !important;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
     animation: fadeIn 0.5s ease-out backwards;
     font-weight: 500;
     letter-spacing: 0.2px;
+    backdrop-filter: blur(8px);
 }
 
 .info-card:hover {
-    background: rgba(100, 200, 255, 0.12);
-    border-color: rgba(100, 200, 255, 0.25);
-    transform: translateX(4px);
-    box-shadow: 0 6px 16px rgba(0, 102, 200, 0.15);
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.15), rgba(0, 150, 255, 0.1));
+    border-color: rgba(0, 200, 255, 0.35);
+    transform: translateX(5px);
+    box-shadow: 0 8px 20px rgba(0, 102, 200, 0.2);
 }
 
 .info-card:nth-child(1) { animation-delay: 0.1s; }
@@ -571,24 +616,25 @@ button[aria-label*="collapse"],
 }
 
 .stButton > button {
-    background: rgba(100, 150, 200, 0.12) !important;
-    border: 1px solid rgba(100, 150, 200, 0.2) !important;
-    color: #c5d8f0 !important;
-    border-radius: 10px !important;
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.15), rgba(0, 150, 255, 0.1)) !important;
+    border: 1px solid rgba(0, 150, 255, 0.3) !important;
+    color: #d4dce6 !important;
+    border-radius: 12px !important;
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.82rem !important;
-    padding: 0.5rem 1rem !important;
+    font-size: 0.84rem !important;
+    padding: 0.6rem 1.2rem !important;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
     width: 100%;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
+    backdrop-filter: blur(8px);
 }
 
 .stButton > button:hover {
-    background: rgba(0, 150, 255, 0.18) !important;
-    border-color: rgba(0, 150, 255, 0.3) !important;
+    background: linear-gradient(135deg, rgba(0, 150, 255, 0.25), rgba(0, 180, 255, 0.2)) !important;
+    border-color: rgba(0, 200, 255, 0.5) !important;
     color: #64c8ff !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 102, 200, 0.2) !important;
+    box-shadow: 0 8px 20px rgba(0, 102, 200, 0.3) !important;
 }
 
 .header-bar {
@@ -611,18 +657,20 @@ button[aria-label*="collapse"],
     margin: 0;
     line-height: 1.15;
     word-break: break-word;
-    background: linear-gradient(135deg, #ffffff, #64c8ff);
+    background: linear-gradient(135deg, #ffffff 0%, #64c8ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.1s backwards;
 }
 
 .header-sub {
     font-size: clamp(0.82rem, 2.2vw, 0.97rem);
-    color: #8fa5c2 !important;
+    color: #b8cde8 !important;
     margin-top: 0.45rem;
     font-weight: 500;
     letter-spacing: 0.3px;
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.2s backwards;
 }
 
 .online-badge {
@@ -658,26 +706,27 @@ button[aria-label*="collapse"],
 }
 
 .chip {
-    padding: 0.5rem 1.1rem;
-    border-radius: 20px;
-    background: rgba(100, 150, 200, 0.08);
-    border: 1px solid rgba(100, 150, 200, 0.2);
-    color: #c5d8f0 !important;
-    font-size: 0.82rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.12), rgba(0, 150, 255, 0.08));
+    border: 1px solid rgba(0, 150, 255, 0.25);
+    color: #d4dce6 !important;
+    font-size: 0.83rem;
     white-space: nowrap;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
     animation: fadeIn 0.6s ease-out backwards;
     font-weight: 500;
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    backdrop-filter: blur(8px);
 }
 
 .chip:hover {
-    background: rgba(100, 200, 255, 0.15);
-    border-color: rgba(100, 200, 255, 0.4);
+    background: linear-gradient(135deg, rgba(0, 150, 255, 0.2), rgba(0, 180, 255, 0.15));
+    border-color: rgba(0, 212, 255, 0.4);
     color: #64c8ff !important;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 102, 200, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 102, 200, 0.25);
 }
 
 .chip:nth-child(1) { animation-delay: 0.1s; }
@@ -690,15 +739,20 @@ button[aria-label*="collapse"],
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0 0.3rem;
+    padding: 0.8rem 0 0.6rem;
     overflow: hidden;
+    border-bottom: 1px solid rgba(0, 150, 255, 0.1);
+    margin-bottom: 0.8rem;
 }
 
 .chat-meta-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #d5dce6 !important;
+    font-size: 0.87rem;
+    font-weight: 700;
+    color: #64c8ff !important;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 [data-testid="stChatMessage"] {
@@ -712,17 +766,17 @@ button[aria-label*="collapse"],
 [data-testid="chatAvatarIcon-assistant"] {
     background: linear-gradient(135deg, #0066ff, #0099ff) !important;
     color: #fff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3) !important;
-    border: 1px solid rgba(0, 150, 255, 0.2) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.4) !important;
+    border: 1px solid rgba(0, 200, 255, 0.3) !important;
 }
 
 [data-testid="chatAvatarIcon-user"] {
-    background: rgba(100, 150, 200, 0.15) !important;
+    background: linear-gradient(135deg, rgba(0, 100, 255, 0.2), rgba(0, 150, 255, 0.15)) !important;
     color: #64c8ff !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(100, 150, 200, 0.2) !important;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(0, 150, 255, 0.3) !important;
+    box-shadow: 0 6px 20px rgba(0, 102, 200, 0.2) !important;
 }
 
 [data-testid="stChatMessageContent"], [data-testid="stChatMessageContent"] p, [data-testid="stChatMessageContent"] * {
@@ -730,19 +784,19 @@ button[aria-label*="collapse"],
 }
 
 [data-testid="stChatMessageContent"] {
-    background: rgba(20, 30, 50, 0.4) !important;
-    border: 1px solid rgba(100, 150, 200, 0.15) !important;
-    border-radius: 16px !important;
-    padding: 1.2rem 1.4rem !important;
-    font-size: 0.96rem !important;
-    line-height: 1.85 !important;
+    background: linear-gradient(135deg, rgba(0, 100, 255, 0.08), rgba(0, 150, 255, 0.04)) !important;
+    border: 1px solid rgba(0, 150, 255, 0.2) !important;
+    border-radius: 18px !important;
+    padding: 1.3rem 1.5rem !important;
+    font-size: 0.97rem !important;
+    line-height: 1.8 !important;
     max-width: 100% !important;
     word-break: break-word !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 8px 24px rgba(0, 102, 200, 0.15), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     font-weight: 500 !important;
-    letter-spacing: 0.3px !important;
+    letter-spacing: 0.2px !important;
 }
 
 [data-testid="stChatInputContainer"], [data-testid="stChatInput"] {
@@ -783,64 +837,65 @@ button[aria-label*="collapse"],
 
 [data-testid="stChatInput"] textarea, [data-testid="stChatInputContainer"] textarea,
 div[data-testid="stChatInput"] > div > div > textarea, div[data-testid="stChatInput"] div div textarea,
-.stChatInput textarea, textarea[aria-label], textarea[placeholder="Ask about Biswajith..."] {
-    background: rgba(15, 25, 45, 0.3) !important;
-    border: 1.5px solid rgba(100, 150, 200, 0.2) !important;
+.stChatInput textarea, textarea[aria-label], textarea[placeholder="Ask anything about Biswajith, his projects, or skills..."] {
+    background: linear-gradient(135deg, rgba(15, 25, 45, 0.4), rgba(20, 35, 60, 0.3)) !important;
+    border: 1.5px solid rgba(0, 150, 255, 0.25) !important;
     color: #f0f2f6 !important;
     -webkit-text-fill-color: #f0f2f6 !important;
-    border-radius: 20px !important;
+    border-radius: 22px !important;
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 0.95rem !important;
+    font-size: 0.96rem !important;
     line-height: 1.8 !important;
     min-height: 56px !important;
-    padding: 1rem 1.3rem !important;
-    caret-color: #64c8ff !important;
+    padding: 1rem 1.4rem !important;
+    caret-color: #00d4ff !important;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
     opacity: 1 !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+    box-shadow: 0 8px 24px rgba(0, 102, 200, 0.15), inset 0 1px 0 rgba(255,255,255,0.08) !important;
     resize: none !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
 }
 
 [data-testid="stChatInput"] textarea::placeholder, [data-testid="stChatInputContainer"] textarea::placeholder,
-textarea[placeholder="Ask about Biswajith..."]::placeholder {
-    color: #6a7d99 !important;
-    -webkit-text-fill-color: #6a7d99 !important;
+textarea[placeholder="Ask anything about Biswajith, his projects, or skills..."]::placeholder {
+    color: #7a8fa3 !important;
+    -webkit-text-fill-color: #7a8fa3 !important;
     opacity: 1 !important;
 }
 
 [data-testid="stChatInput"] textarea:focus, [data-testid="stChatInputContainer"] textarea:focus,
-textarea[placeholder="Ask about Biswajith..."]:focus {
-    border-color: rgba(0, 150, 255, 0.5) !important;
-    box-shadow: 0 0 0 4px rgba(100, 200, 255, 0.12), 0 8px 24px rgba(0,102,255,0.25) !important;
+textarea[placeholder="Ask anything about Biswajith, his projects, or skills..."]:focus {
+    border-color: rgba(0, 200, 255, 0.6) !important;
+    box-shadow: 0 0 0 4px rgba(0, 150, 255, 0.15), 0 8px 24px rgba(0, 150, 255, 0.3) !important;
     outline: none !important;
-    background: rgba(15, 25, 50, 0.5) !important;
+    background: linear-gradient(135deg, rgba(15, 30, 55, 0.6), rgba(20, 40, 70, 0.5)) !important;
 }
 
 [data-testid="stChatInput"] button, [data-testid="stChatInputContainer"] button {
     background: linear-gradient(135deg, #0066ff, #0099ff) !important;
     color: #ffffff !important;
-    border-radius: 16px !important;
-    border: none !important;
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    flex: 0 0 48px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(0, 200, 255, 0.3) !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    flex: 0 0 50px !important;
     align-self: flex-end !important;
     margin: 0 0 4px 0 !important;
-    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.35) !important;
-    transition: all 0.2s cubic-bezier(0.23, 1, 0.320, 1) !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
+    box-shadow: 0 10px 28px rgba(0, 102, 255, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1) !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 }
 
 [data-testid="stChatInput"] button:hover, [data-testid="stChatInputContainer"] button:hover {
-    opacity: 0.9 !important;
-    transform: translateY(-2px) !important;
+    opacity: 0.95 !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 14px 36px rgba(0, 102, 255, 0.5) !important;
     box-shadow: 0 12px 32px rgba(0, 102, 255, 0.45) !important;
 }
 
@@ -1111,10 +1166,10 @@ RULES:
 """
 
 with st.sidebar:
-    st.markdown('<div class="avatar"><div class="avatar-badge">B</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="avatar"><div class="avatar-badge">BP</div></div>', unsafe_allow_html=True)
     st.markdown('<div class="profile-name">Biswajith PN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="profile-role">AI & Data Science Student</div>', unsafe_allow_html=True)
-    st.markdown('<div class="profile-bio">Practical builder focused on AI products and applied software work.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="profile-role">AI & Data Science Engineer</div>', unsafe_allow_html=True)
+    st.markdown('<div class="profile-bio">Building intelligent AI solutions, chatbots, and software applications with practical expertise in Python, Streamlit, and LangChain.</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="section-label">Quick Facts</div>', unsafe_allow_html=True)
     facts = [
@@ -1161,7 +1216,8 @@ with st.sidebar:
     st.markdown('<div class="section-label">Connect</div>', unsafe_allow_html=True)
     connect = [
         ("💼", "LinkedIn", "linkedin.com/in/biswajithpn"),
-        ("📱", "Phone", "81100 61566"),
+        ("�", "GitHub", "github.com/BiswajithPN"),
+        ("💬", "WhatsApp", "81100 61566"),
     ]
     for icon, label, val in connect:
         st.markdown(f'<div class="info-card"><strong>{icon} {label}</strong><br><span style="font-size: 0.75rem;">{val}</span></div>', unsafe_allow_html=True)
@@ -1179,35 +1235,35 @@ with st.sidebar:
 st.markdown("""
 <div class="header-bar">
     <div class="header-left">
-        <div class="header-title">Chat with Biswajith</div>
-        <div class="header-sub">Ask about projects, skills, career goals, or creative work.</div>
+        <div class="header-title">Biswajith's AI Assistant</div>
+        <div class="header-sub">Expert guidance on AI, software development, and creative projects</div>
     </div>
     <div class="online-badge">
         <span class="online-dot"></span> Online
     </div>
 </div>
 <div class="chips-row">
-    <span class="chip">Projects</span>
-    <span class="chip">Skills</span>
-    <span class="chip">Career</span>
-    <span class="chip">Creative Work</span>
-    <span class="chip">Tech Stack</span>
+    <span class="chip">💻 Projects</span>
+    <span class="chip">🛠️ Skills</span>
+    <span class="chip">🎯 Career</span>
+    <span class="chip">🎬 Creative</span>
+    <span class="chip">⚙️ Tech Stack</span>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="chat-meta"><span class="chat-meta-name">🤖 Biswajith AI</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="chat-meta"><span class="chat-meta-name">🤖 AI Assistant</span></div>', unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
     st.session_state.messages = [{
         "role": "assistant",
-        "content": "Hi! I'm Biswajith's AI. Ask me about his projects, skills, internship goals, or creative work 👋"
+        "content": "Welcome to Biswajith's AI Assistant. I'm here to provide detailed insights into his projects, technical expertise, career aspirations, and creative work. Feel free to ask about anything related to AI, software development, chatbots, or his creative endeavors. How can I help you today?"
     }]
 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
-if prompt := st.chat_input("Ask about Biswajith..."):
+if prompt := st.chat_input("Ask anything about Biswajith, his projects, or skills..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.write(prompt)
